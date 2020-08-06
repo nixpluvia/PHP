@@ -19,3 +19,10 @@ if ( $member['loginPw'] != $_REQUEST['loginPw']){
     jsAlert("비밀번호가 일치하지 않습니다.");
     jsHistoryBack();
 }
+
+
+$_SESSION['loginedMemberId'] = $member['id'];
+$_SESSION['loginedMember'] = $member;
+
+jsAlert("{$member['name']}님 안녕하세요.");
+jsLocationReplace("/adm/home/main.php");

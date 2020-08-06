@@ -1,6 +1,17 @@
-/* 커스텀 */
-
-.con {
-    width: 1000px;
+.top-bar {
+    height: 100px;
+    background-color: #000;
+    color: #fff;
 }
 
+.top-bar .logo {
+    font-size: 2rem;
+}
+
+.top-bar .menu-box-1 > ul > li > a {
+    padding: 0 10px;
+}
+.top-bar .menu-box-1 > ul > li:hover > a {
+    background-color: #fff;
+    color: #000;
+}

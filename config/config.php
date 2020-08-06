@@ -1,7 +1,7 @@
 <?php
-define("DB_HOST", "127.0.0.1");
-define("DB_ID","sbsst");
-define("DB_PW","sbs123414");
+define("DB_HOST", "localhost");
+define("DB_ID","root");
+define("DB_PW","");
 define("DB_NAME","phpSiteTemplate");
 
 

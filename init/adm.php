@@ -17,9 +17,11 @@ require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../lib/lib.php';
 require_once __DIR__ . '/../app/app.php';
 
+filterSqlInjection($_REQUEST);
+
 
 // 비로그인 시 로그인 페이지로 이동
 if ( $config['needToLogin'] and App::isLogined() == false ){
-    jsAlert('로그인 후 이용해 주세요.');
-    jsLocationReplace('/adm/member/login.php');
+    jsAlert("로그인 후 이용해 주세요.");
+    jsLocationReplace("/adm/member/login.php");
 }

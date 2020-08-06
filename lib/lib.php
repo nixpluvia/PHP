@@ -4,8 +4,8 @@ function jsAlert(string $msg){
     echo "<script>alert('{$msg}')</script>" ;
 }
 
-function jsLocationReplace(){
-    echo "<script>location.replace('{$msg}')</script>" ;
+function jsLocationReplace(string $url){
+    echo "<script> location.replace('{$url}'); </script>" ;
     exit;
 }
 
@@ -23,6 +23,20 @@ function jsHistoryBack(){
 function DB__execute($sql){
     global $config;
     return mysqli_query($config['dbConn'], $sql);
+}
+
+function DB__insert($sql){
+    global $config;
+    DB__execute($sql);
+    return mysqli_insert_id($config['dbConn']);
+}
+
+function DB__update($sql){
+    DB__execute($sql);
+}
+
+function DB__delete($sql){
+    DB__execute($sql);
 }
 
 function DB__getDBRows($sql){
@@ -45,4 +59,11 @@ function DB__getDBRow($sql){
     }
 
     return [];
+}
+
+function filterSqlInjection(&$args){
+    global $config;
+    foreach ( $args as $key => $val ) {
+        $args[$key] = mysqli_real_escape_string($config['dbConn'], $val);
+    }
 }
