@@ -17,7 +17,7 @@
                 <ul class="flex height-100p">
                     <li><a href="" class="flex flex-ai-c height-100p">홈</a></li>
                     <li><a href="/adm/board/list.php" class="flex flex-ai-c height-100p">게시판 관리</a></li>
-                    <li><a href="" class="flex flex-ai-c height-100p">게시물 관리</a></li>
+                    <li><a href="/adm/article/list.php" class="flex flex-ai-c height-100p">게시물 관리</a></li>
                     <li><a href="" class="flex flex-ai-c height-100p">팝업 관리</a></li>
                     <?php if( App::isLogined() ) { ?>
                         <li><a href="/adm/member/doLogout.php" class="flex flex-ai-c height-100p">로그아웃</a></li>

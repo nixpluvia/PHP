@@ -65,7 +65,8 @@ a{
 }
 
 /* 폼 관련 */
-.form1 .form-control > input{
+.form1 .form-control > input,
+.form1 .form-control > select {
     display: block;
     width: 100%;
     box-sizing: border-box;
