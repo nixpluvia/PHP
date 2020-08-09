@@ -22,6 +22,17 @@ class ArticleDao {
         return DB__getDBRow($sql);
     }
 
+    public static function getArticleById(int $id) {
+        $sql = "
+        SELECT *
+        FROM article
+        WHERE id = '{$id}'
+        AND delStatus = 0
+        ";
+
+        return DB__getDBRow($sql);
+    }
+
     // board code 선택
     public static function getBoardByCode(string $code) {
         $sql = "
@@ -38,6 +49,18 @@ class ArticleDao {
     public static function deleteBoard(int $id) {
         $sql = "
         DELETE FROM board
+        WHERE id = '{$id}'
+        ";
+
+        DB__delete($sql);
+    }
+
+    public static function deleteArticle(int $id) {
+        $sql = "
+        UPDATE article
+        SET displayStatus = 0,
+        delStatus = 1,
+        delDate = NOW()
         WHERE id = '{$id}'
         ";
 
@@ -82,12 +105,43 @@ class ArticleDao {
         DB__update($sql);
     }
 
+    public static function modifyArticle($args) {
+        $sql = "
+        UPDATE article
+        SET updateDate = NOW(),
+        ";
+
+        if ( isE($args, 'displayStatus') ) {
+            $sql .= "`displayStatus` = '{$args['displayStatus']}',";
+        }
+
+        if ( isE($args, 'boardId') ) {
+            $sql .= "`boardId` = '{$args['boardId']}',";
+        }
+
+        if ( isE($args, 'title') ) {
+            $sql .= "`title` = '{$args['title']}',";
+        }
+
+        if ( isE($args, 'body') ) {
+            $sql .= "`body` = '{$args['body']}'";
+        }
+
+
+        $sql .="
+        WHERE id = '${args['id']}'
+        ";
+
+        DB__update($sql);
+    }
+
 
     public static function getForPrintArticlesCount($args) : int{
         $sql = "
         SELECT COUNT(*) AS cnt
         FROM article
         WHERE 1
+        AND delStatus = 0
         ";
 
         if ( isE($args, 'displayStatus') and $args['displayStatus'] !== '__ALL__' ) {
@@ -125,6 +179,7 @@ class ArticleDao {
         INNER JOIN board AS B
         ON A.boardId = B.id
         WHERE 1
+        AND delStatus = 0
         ";
 
         if ( isE($args, 'displayStatus') and $args['displayStatus'] !== '__ALL__' ) {

@@ -33,7 +33,7 @@ $boards = ArticleService::getForPrintBoards();
                 <td><?=$board['id']?></td>
                 <td><?=$board['regDate']?></td>
                 <td><?=$board['code']?></td>
-                <td><?=$board['name']?></td>
+                <td><a  href="/adm/board/modify.php?id=<?=$board['id']?>"><?=$board['name']?></a></td>
                 <td class="text-align-center">
                     <a class="btn btn-success" href="/adm/board/modify.php?id=<?=$board['id']?>">수정</a>
                     <a onclick="if(confirm('정말 삭제 하시겠습니까?') == false) return false;" class="btn btn-danger" href="/adm/board/doDelete.php?id=<?=$board['id']?>">삭제</a>

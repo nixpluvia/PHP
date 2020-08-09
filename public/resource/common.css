@@ -93,3 +93,21 @@ a{
 .btn-danger {
     background-color: red;
 }
+
+.ratio-16-9::after {
+    content:"";
+    display: block;
+    padding-top: 56.25%;
+}
+
+.relative {
+    position: relative;
+}
+
+.abs-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

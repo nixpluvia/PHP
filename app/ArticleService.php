@@ -10,6 +10,10 @@ class ArticleService {
         return ArticleDao::getBoardById($id);
     }
 
+    public static function getArticleById(int $id) {
+        return ArticleDao::getArticleById($id);
+    }
+
     // board code 선택
     public static function getBoardByCode(string $code) {
         return ArticleDao::getBoardByCode($code);
@@ -18,6 +22,10 @@ class ArticleService {
     // board 삭제
     public static function deleteBoard(int $id) {
         ArticleDao::deleteBoard($id);
+    }
+
+    public static function deleteArticle(int $id) {
+        ArticleDao::deleteArticle($id);
     }
 
     // board 생성
@@ -30,15 +38,33 @@ class ArticleService {
         return ArticleDao::modifyBoard($args);
     }
 
+    public static function modifyArticle($args) {
+        return ArticleDao::modifyArticle($args);
+    }
+
     public static function writeArticle($args) : int {
         return ArticleDao::writeArticle($args);
     }
 
-    public static function getDisplayStatusName(int $displayStatus) : string {
-        if ( $displayStatus == 1) {
-            return '노출';
+    public static function getBoardName($boardId, &$boards) : string {
+        foreach ( $boards as $board ){
+            if( $boardId == $board['id'] ) {
+                return $board['name'];
+            }
         }
-        return '미노출';
+
+        return '';
+    }
+
+    public static function getDisplayStatusNames() {
+        return [
+            0 => '미노출',
+            1 => '노출'
+        ];
+    }
+
+    public static function getDisplayStatusName(int $displayStatus) : string {
+        return static::getDisplayStatusNames()[$displayStatus];
     }
 
     public static function getForPrintListData($args) {
@@ -67,5 +93,4 @@ class ArticleService {
         
         return $rsData;
     }
-
 }

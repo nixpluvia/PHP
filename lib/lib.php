@@ -159,5 +159,13 @@ function getUrlInfo(string $url) {
 }
 
 function isE(&$arr, $key) {
-    return isset($arr[$key]) and !empty($arr[$key]);
+    if ( !isset($arr[$key]) ) {
+        return false;
+    }
+
+    if ( $arr[$key] === '' ) {
+        return false;
+    }
+
+    return true;
 }
