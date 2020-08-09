@@ -3,10 +3,11 @@
 // 관리자 페이지들을 위한 공통작업
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../init/adm.php';
 
-$pageTitle = "게시물 관리";
+$pageTitle = "게시물 리스트";
 // 관리자 페이지 공통 상단
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../part/adm/head.php';
 
+$_REQUEST['displayStatus'] = '__ALL__';
 $listData = ArticleService::getForPrintListData($_REQUEST);
 $articles = $listData['articles'];
 $totalPage = $listData['totalPage'];
@@ -40,7 +41,7 @@ $boards = ArticleService::getForPrintBoards();
                 <td><?=$article['id']?></td>
                 <td><?=$article['regDate']?></td>
                 <td><?=$article['boardName']?></td>
-                <td><?=$article['displayStatus']?></td>
+                <td><?=ArticleService::getDisplayStatusName($article['displayStatus'])?></td>
                 <td><?=$article['title']?></td>
                 <td><?=$article['body']?></td>
                 <td class="text-align-center">
@@ -111,7 +112,7 @@ $boards = ArticleService::getForPrintBoards();
 </div>
 
 <div class="con margin-top-30">
-    <a class="btn btn-info" href="/adm/article/make.php">게시판 생성</a>
+    <a class="btn btn-info" href="/adm/article/write.php">게시판 생성</a>
 </div>
 
 

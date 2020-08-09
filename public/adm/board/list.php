@@ -3,7 +3,7 @@
 // 관리자 페이지들을 위한 공통작업
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../init/adm.php';
 
-$pageTitle = "게시판 관리";
+$pageTitle = "게시판 리스트";
 // 관리자 페이지 공통 상단
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../part/adm/head.php';
 

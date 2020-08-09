@@ -160,4 +160,4 @@ function getUrlInfo(string $url) {
 
 function isE(&$arr, $key) {
     return isset($arr[$key]) and !empty($arr[$key]);
-} 
+}

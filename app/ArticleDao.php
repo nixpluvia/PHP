@@ -56,6 +56,20 @@ class ArticleDao {
         return DB__insert($sql);
     }
 
+    public static function writeArticle($args) : int {
+        $sql = "
+        INSERT INTO article
+        SET regDate = NOW(),
+        updateDate = NOW(),
+        `memberId` = '${args['memberId']}',
+        `boardId` = '${args['boardId']}',
+        `title` = '${args['title']}',
+        `body` = '${args['body']}'
+        ";
+
+        return DB__insert($sql);
+    }
+
     public static function modifyBoard($args) {
         $sql = "
         UPDATE board
@@ -73,8 +87,15 @@ class ArticleDao {
         $sql = "
         SELECT COUNT(*) AS cnt
         FROM article
-        WHERE displayStatus = 1
+        WHERE 1
         ";
+
+        if ( isE($args, 'displayStatus') and $args['displayStatus'] !== '__ALL__' ) {
+            $sql .= "
+            AND displayStatus = '{$args['boardId']}'
+            ";
+        }
+
 
         if ( isE($args, 'boardId') ) {
             $sql .= "
@@ -103,8 +124,14 @@ class ArticleDao {
         FROM article AS A
         INNER JOIN board AS B
         ON A.boardId = B.id
-        WHERE displayStatus = 1
+        WHERE 1
         ";
+
+        if ( isE($args, 'displayStatus') and $args['displayStatus'] !== '__ALL__' ) {
+            $sql .= "
+            AND A.displayStatus = '{$args['boardId']}'
+            ";
+        }
 
         if ( isE($args, 'boardId') ) {
             $sql .= "
